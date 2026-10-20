@@ -1,0 +1,12 @@
+{
+  "name": "current-forecast-observatory",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "python3 -m http.server 5173 --bind 0.0.0.0",
+    "start": "python3 -m http.server 5173 --bind 0.0.0.0",
+    "test": "node --test tests/model.test.js"
+  }
+}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080e13">
+  <meta name="description" content="Explore the mathematics of electricity price forecasting through an interactive ensemble observatory, inspired by research on Peru’s electricity market.">
+  <title>Current — Energy Forecast Observatory</title>
+  <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Current home"><span class="brand-icon">ϟ</span> current<span class="brand-dot">.</span></a>
+    <div class="top-title">AN ENERGY FORECAST OBSERVATORY</div>
+    <button id="present" class="button subtle"><span aria-hidden="true">▷</span> Presentation mode</button>
+  </header>
+  <main>
+    <section class="intro">
+      <div><div class="eyebrow"><span class="status-dot"></span> MATHEMATICS × RENEWABLE ENERGY <span class="edition">FIELD NOTES 001</span></div>
+      <h1>A clearer view of<br>an uncertain <em>future.</em></h1>
+      <p>One forecast sees a pattern. Six see a bigger picture.<br>Explore how mathematical models come together to predict electricity prices.</p></div>
+      <div class="research-tag"><span class="tiny">INSPIRED BY RESEARCH</span><strong>Peru’s electricity market</strong><span>2001—2022 <i>→</i> 264 monthly observations</span><button id="source-link">Explore the paper <span>→</span></button></div>
+    </section>
+    <div class="workspace-top"><nav aria-label="Explore views"><button class="tab active" data-view="observatory">01 <span>Observatory</span></button><button class="tab" data-view="math">02 <span>The mathematics</span></button><button class="tab" data-view="research">03 <span>Research findings</span></button></nav><span class="workspace-caption">EXPLORE · ADJUST · UNDERSTAND</span></div>
+    <section id="observatory" class="view active" aria-label="Forecast observatory">
+      <div class="observatory-grid">
+        <div class="universe">
+          <div class="scene-heading"><span class="tiny">THE ENSEMBLE SYSTEM</span><span class="live-label"><span class="status-dot"></span> INTERACTIVE SIMULATION</span></div>
+          <canvas id="space" aria-label="Animated orbital illustration of six forecasting models connected to an ensemble. Select a model using the buttons below."></canvas>
+          <div id="orbit-labels"></div>
+          <div class="scene-center"><span class="tiny">COMBINED FORECAST</span><strong id="central-price">—</strong><span>illustrative price index</span></div>
+          <div class="scene-footer"><span><span class="small-cross">✧</span> Select a model to explore its role</span><button id="motion" aria-label="Pause orbital animation">II Pause motion</button></div>
+        </div>
+        <aside class="control-panel">
+          <div class="panel-title"><div class="tiny">YOUR FORECAST MIX</div><span>6 MODELS</span></div>
+          <h2>Better, together.</h2><p class="muted">Adjust each model’s influence.<br>The weights always add up to 100%.</p>
+          <div class="segmented" role="group" aria-label="Weight presets"><button class="selected" data-preset="equal">Equal</button><button data-preset="esm">Favor ESM</button><button data-preset="custom">Custom</button></div>
+          <div id="weight-controls"></div>
+          <div class="total-row"><span>TOTAL CONTRIBUTION</span><strong id="total-weight">100.0%</strong></div>
+          <div class="model-insight"><div><span id="insight-dot" class="color-dot"></span><strong id="model-name">Autoregressive</strong></div><p id="model-description"></p><code id="model-formula"></code></div>
+          <button id="reset" class="text-button">↺ Reset the experiment</button>
+        </aside>
+      </div>
+      <div class="chart-section">
+        <div class="chart-head"><div><span class="tiny">THE FORECAST IN MOTION</span><h2>Where the models meet.</h2></div><div class="legend"><span><i class="line actual"></i>Observed example</span><span><i class="line ensemble"></i>Your ensemble</span><span><i class="line individual"></i>Six model examples</span></div></div>
+        <div class="chart-wrap"><svg id="forecast-chart" viewBox="0 0 1000 225" role="img" aria-label="Simulated monthly price index: observations, individual forecasts, and weighted ensemble"></svg><div id="chart-tooltip" hidden></div></div>
+        <div class="chart-bottom"><div class="simulation-note"><span class="status-dot"></span><span><strong>Illustrative data.</strong> Synthetic paths explain the method; these are not Peru’s observations or fitted models.</span></div><div class="mini-stat"><span>DEMO MAPE</span><strong id="demo-mape">—</strong></div><div class="mini-stat"><span>NEXT MONTH INDEX</span><strong id="next-price">—</strong></div></div>
+      </div>
+      <div class="takeaway"><span class="takeaway-symbol">→</span><div><span class="tiny">WHY THIS MATTERS FOR RENEWABLES</span><p>Forecast the price. Plan the energy.</p></div><p>Price forecasts can inform when to buy electricity, schedule storage, or sell renewable generation. Weather-driven solar and wind inputs are a <strong>future extension</strong> proposed by the authors—not inputs to this study.</p><button class="text-button" data-go="math">See the mathematics →</button></div>
+    </section>
+    <section id="math" class="view" aria-label="The mathematics">
+      <div class="section-intro"><span class="tiny">FROM A COMPLEX SIGNAL TO A SINGLE FORECAST</span><h2>Unpack the uncertainty.</h2><p>The paper separates predictable patterns from short-term fluctuations, forecasts the residual, then puts the pieces back together.</p></div>
+      <div class="math-grid"><div class="math-card"><span class="step-number">01 / DECOMPOSE</span><h3>Find the hidden layers.</h3><div class="large-equation">log(Yₘ) = <span class="gold">τₘ</span> + <span class="blue">aₘ</span> + <span class="mint">yₘ</span></div><p>Log price = long-run trend + annual seasonality + residual. The study uses regression splines for trend and monthly dummy variables for seasonality (Eqs. 2.1–2.2).</p><label class="component-toggle"><input type="checkbox" data-component="trend" checked><span class="gold">Trend</span></label><label class="component-toggle"><input type="checkbox" data-component="season" checked><span class="blue">Seasonality</span></label><label class="component-toggle"><input type="checkbox" data-component="residual" checked><span class="mint">Residual</span></label><svg id="decomposition" viewBox="0 0 550 180" role="img" aria-label="Synthetic decomposition into trend, seasonality, and residual"></svg><small>Illustrative components in log-index space. Toggle a layer to see its contribution.</small></div>
+      <div class="math-card"><span class="step-number">02 / COMBINE</span><h3>Give each model a voice.</h3><div class="large-equation">ŷₘ₊₁ = Σⱼ₌₁⁶ wⱼ ŷₘ₊₁,ⱼ</div><p>Each model predicts the residual. Multiply each prediction by its weight and add them together. Positive weights sum to one (Eq. 2.9).</p><div id="weight-equation" class="weight-equation"></div><div class="equation-note">Try changing the weights in the Observatory. This calculation updates with your mix.</div><div class="large-equation smaller">Ŷₘ₊₁ = exp(τ̂ₘ₊₁ + âₘ₊₁ + ŷₘ₊₁)</div><p>Restore the trend and seasonal component, then exponentiate back to the price scale. This is a direct inverse-log reconstruction; a mean price forecast can require a bias correction.</p></div></div>
+      <div class="math-grid"><div class="math-card"><span class="step-number">03 / EVALUATE</span><h3>How far off were we?</h3><div class="large-equation">MAPE = <span class="fraction">100 / n</span> Σ |(Yₜ − Ŷₜ) / Yₜ|</div><p>Mean absolute percentage error measures the average relative size of prediction errors. Lower is better. Our formula uses absolute errors; the printed paper’s MAPE equation omits the absolute-value bars.</p><div class="metric-example"><span>Your 24-point simulated backtest</span><strong id="math-mape">—</strong></div><p>These are one-step illustrative forecasts using past residuals and known synthetic trend/seasonal functions. They are not an independent fitted-model benchmark or evidence of real-world accuracy.</p></div><div class="math-card"><span class="step-number">04 / VALIDATE</span><h3>Keep the future out of training.</h3><div class="split-bar"><span>TRAIN</span><span>VALIDATE</span><span>TEST</span></div><p>Fit models on earlier observations, choose weights using validation errors, and evaluate on a later test period. Refit as the time window expands.</p><div class="source-caution"><strong>A detail to mention in your presentation</strong><p>The paper lists 264 observations but gives a 180 / 48 / 48 split, totaling 276. Its stated calendar ranges imply 168 / 48 / 48 instead. We show the calendar interpretation here, not a verified replication.</p></div></div></div>
+    </section>
+    <section id="research" class="view" aria-label="Published research findings">
+      <div class="section-intro"><span class="tiny">PUBLISHED EVIDENCE · NOT SIMULATION OUTPUT</span><h2>What did the study find?</h2><p>Validation-weighted averaging improved MAPE over every single model in Table 2. But not every metric tells the same story.</p></div>
+      <div class="research-metrics"><div><span class="tiny">ENSEMBLE O · REPORTED MAPE</span><strong>2.5278<span>%</span></strong><p>Table 2 reports 0.025278 as a fraction.</p></div><div><span class="tiny">RELATIVE MAPE REDUCTION VS ESM</span><strong>20.68<span>%</span></strong><p>(0.031869 − 0.025278) / 0.031869</p></div><div><span class="tiny">THE KEY INSIGHT</span><strong class="word-stat">Weights matter.</strong><p>Equal weighting (E) performed worse than ESM.</p></div></div>
+      <div class="results-card"><div class="chart-head"><div><span class="tiny">NINE MODELS · TABLE 2</span><h3>Compare the reported errors.</h3></div><label class="metric-select">Metric <select id="metric"><option value="mape">MAPE (%)</option><option value="mae">MAE</option><option value="rmse">RMSE</option></select></label></div><div id="results-bars"></div><p class="results-caption">Lower is better. Values are transcribed from Table 2 (p. 21963); changing the demo weights does not change these published results.</p></div>
+      <div class="math-grid"><div class="math-card"><span class="step-number">READING THE RESULTS CRITICALLY</span><h3>A useful result, with caveats.</h3><p>Table 2 gives Ensemble I the lowest RMSE (0.255640), while Ensemble O has RMSE 0.276624. Table 4 assigns 0.255640 to O. We preserve Table 2 rather than claiming O wins every metric.</p><p>The paper’s claim of universal statistical superiority also needs care: Table 3 includes an I–O p-value of 0.092750, above 0.05, and directional entries differ. Do not present it as conclusive evidence that O beats every model.</p></div><div class="math-card"><span class="step-number">RENEWABLE ENERGY CONNECTION</span><h3>From forecasting to decisions.</h3><p>A price forecast can be an input to battery scheduling or renewable revenue planning. A later project could add wind speed, solar radiation, and demand, then optimize decisions under forecast uncertainty.</p><p>This paper models electricity prices—not PV output, grid power flows, or causal effects of renewable adoption. This website demonstrates its ensemble idea without claiming those extensions were tested.</p></div></div>
+      <article class="citation" id="citation"><span class="tiny">SOURCE & DATA TRANSPARENCY</span><h3>Analysis and forecasting of electricity prices using an improved time series ensemble approach: an application to the Peruvian electricity market</h3><p>Salvatore Mancha Gonzales, Hasnain Iftikhar & Javier Linkolk López-Gonzales · AIMS Mathematics 9(8), 21952–21971 · 2024</p><a href="https://doi.org/10.3934/math.20241067" target="_blank" rel="noopener">Read the research paper →</a><p class="muted">Published figures and equations adapted with attribution under CC BY 4.0. The supplied PDF contains no raw monthly price table or fitted-model coefficients. The animated scene, paths, weights, and price indices here are educational constructions; preset weights are not the paper’s fitted weights. Model naming varies in the paper (ARMA/ARIMA); reported comparisons follow Table 2.</p></article>
+    </section>
+    <footer><a class="brand" href="#">ϟ current.</a><span>A little mathematics. A clearer energy future.</span><span>RESEARCH-INSPIRED · BUILT TO EXPLORE</span></footer>
+  </main>
+  <dialog id="presentation"><div class="presentation-top"><span class="tiny">CURRENT / PRESENTER NOTES</span><button id="close-presentation" aria-label="Close presentation">×</button></div><div id="slide-content"></div><div class="presentation-bottom"><button id="previous-slide" class="button">← Previous</button><span id="slide-counter"></span><button id="next-slide" class="button primary">Next →</button></div><small>Use ← and → to navigate. Escape closes this guide.</small></dialog>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
